@@ -1,3 +1,239 @@
-p {
-	color: red;
+$color-primario: #e6e20f;
+$color-secundario: black;
+$color-terciario: white;
+$color-fuente: #aaa;
+
+$box-shadow: 0px 0px 2.2px rgba(0, 0, 0, 0.143), 0px 0px 5.3px rgba(0, 0, 0, 0.206),
+	0px 0px 10px rgba(0, 0, 0, 0.255), 0px 0px 17.9px rgba(0, 0, 0, 0.304),
+	0px 0px 33.4px rgba(0, 0, 0, 0.367), 0px 0px 80px rgba(0, 0, 0, 0.51);
+
+$limit: 10;
+$unit: 8px;
+
+@function size($value) {
+	@return $value * $unit;
+}
+@mixin reset-pm {
+	padding: 0;
+	margin: 0;
+}
+
+@mixin btn($background-color, $color, $bold) {
+	background-color: $background-color;
+	color: $color;
+	border-radius: 50px;
+	padding: 20px 30px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+
+	@if ($bold == "true") {
+		font-weight: bolder;
+	}
+}
+.btn {
+	&.btn-cta {
+		@include btn($color-primario, $color-secundario, "true");
+		&:hover {
+			@include btn($color-terciario, $color-secundario, "true");
+			box-shadow: $box-shadow;
+		}
+	}
+	&:hover {
+		@include btn($color-terciario, $color-secundario, "true");
+		box-shadow: $box-shadow;
+	}
+}
+
+* {
+	@include reset-pm;
+	box-sizing: border-box;
+}
+body {
+	background-color: $color-primario;
+	font-family: Arial, Helvetica, sans-serif;
+	height: 100vh;
+	overflow: hidden;
+}
+
+a {
+	color: $color-secundario;
+	text-decoration: none;
+}
+
+h2 {
+	font-weight: bolder;
+	font-size: size(6);
+	width: 20rem;
+}
+h3 {
+	font-weight: lighter;
+	font-size: size(3);
+}
+
+.container {
+	background-color: white;
+	margin: 5rem auto;
+	height: calc(100vh - 150px);
+	width: 70%;
+	padding: 50px;
+	box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+	background-image: url(../src/static/fondo.webp);
+	background-size: 100% 100%;
+	border-radius: 50px;
+}
+
+ul {
+	@include reset-pm();
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	li {
+		a {
+			@include btn($color-terciario, $color-fuente, true);
+			&:hover {
+				@include btn($color-primario, $color-secundario, "false");
+				box-shadow: $box-shadow;
+			}
+		}
+	}
+}
+header {
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.icono-menu {
+		width: 2rem;
+		height: 2rem;
+		z-index: 999;
+		cursor: pointer;
+		display: none;
+	}
+	.bg-M {
+		background-image: url(../src/static/menu.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.bg-C {
+		background-image: url(../src/static/cancelar.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}
+
+.opacity {
+	opacity: 1;
+}
+.colocacion {
+	margin-top: -7rem;
+	margin-right: -7rem;
+}
+
+.prices {
+	.prev {
+		font-size: size(2);
+		font-weight: bolder;
+		color: $color-fuente;
+		text-decoration: line-through;
+	}
+	.now {
+		font-size: size(5);
+		font-weight: bolder;
+	}
+}
+
+.row {
+	display: flex;
+	align-items: center;
+
+	.col {
+		width: 50%;
+	}
+	.col-30 {
+		width: 30%;
+	}
+	.col-70 {
+		width: 70%;
+	}
+	.flecha {
+		i {
+			color: white;
+			font-size: 2rem;
+			margin-left: -3rem;
+		}
+	}
+}
+.m-auto {
+	margin: 0 auto;
+}
+.slider {
+	overflow: hidden;
+	.container-img {
+		width: 30rem;
+		height: 23rem;
+		background-image: url(../src/static/comida.png);
+		background-size: cover;
+	}
+
+	.container-img2 {
+		width: 30rem;
+		height: 23rem;
+		background-image: url(../src/static/comida2.png);
+		background-size: cover;
+	}
+	.container-img3 {
+		width: 30rem;
+		height: 23rem;
+		background-image: url(../src/static/comida3.png);
+		background-size: cover;
+	}
+	.container-img4 {
+		width: 30rem;
+		height: 23rem;
+		background-image: url(../src/static/comida4.png);
+		background-size: cover;
+	}
+}
+
+@for $i from 1 to $limit {
+	.m-#{$i} {
+		margin: $i * $unit;
+	}
+	.p-#{$i} {
+		padding: $i * $unit;
+	}
+	.py-#{$i} {
+		padding: $i * $unit 0;
+	}
+}
+
+@for $i from 1 to 4 {
+	.w-#{$i} {
+		width: $i * 25%;
+	}
+}
+
+//! Media queris
+@media (max-width: 2000px) {
+}
+@media (max-width: 1200px) {
+	nav {
+		ul {
+			display: none;
+		}
+		.icono-menu {
+			display: block;
+		}
+	}
+}
+@media (max-width: 900px) {
+}
+@media (max-width: 650px) {
+}
+@media (max-width: 450px) {
 }
